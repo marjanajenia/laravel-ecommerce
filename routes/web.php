@@ -98,8 +98,6 @@ Route::group(['prefix'=>'/admin'],function(){
         Route::get('/manage','App\Http\Controllers\Backend\VendorController@index')->middleware(['auth'])->name('Vendormanage');
 
         Route::get('/edit/{id}','App\Http\Controllers\Backend\VendorController@edit')->middleware(['auth'])->name('Vendoredit');
-        
-        Route::get('/show','App\Http\Controllers\Backend\VendorController@show')->middleware(['auth'])->name('Vendorshow');
 
         Route::post('/update/{id}','App\Http\Controllers\Backend\VendorController@update')->middleware(['auth'])->name('Vendorupdate');
 

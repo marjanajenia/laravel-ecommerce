@@ -15,7 +15,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.vendor.vendormanage');
+        $vendor = Vendor::orderby('id','asc')->get();
+        return view('backend.pages.vendor.vendormanage', compact('vendor'));
     }
 
     /**
@@ -83,7 +84,8 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vendor= Vendor::find($id);
+        return view('backend.pages.vendor.editvendor', compact('vendor'));    
     }
 
     /**
@@ -95,7 +97,19 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vendor=Vendor::find($id);
+        $vendor->name=$request->name;
+        $vendor->des=$request->des;
+        $vendor->office_address =$request->office_address;
+        $vendor->email=$request->email;
+        $vendor->phone=$request->phone;
+        $vendor->operator_name=$request->operator_name;
+        $vendor->operator_phone=$request->operator_phone;
+        $vendor->tin=$request->tin;
+        $vendor->trade_num=$request->trade_num;
+        $vendor->status=$request->status;
+        $vendor->update();
+         return redirect()->route('Vendormanage');
     }
 
     /**
@@ -106,6 +120,8 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vendor=Vendor::find($id);
+       $vendor->delete();
+       return redirect()->route('Vendormanage');
     }
 }
